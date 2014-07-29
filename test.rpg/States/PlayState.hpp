@@ -2,6 +2,7 @@
 #define PLAYSTATE_HPP
 
 #include "GameState.hpp"
+#include "SFML\Graphics\Text.hpp"
 
 class StateMachine;
 
@@ -23,7 +24,7 @@ public:
 	void draw();
 
 private:
-
+	sf::Text _state;
 };
 
 #endif // PLAYSTATE_HPP

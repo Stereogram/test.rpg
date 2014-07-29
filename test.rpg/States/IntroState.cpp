@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include "../Game.hpp"
 
 #include <iostream>
 #include <memory>
@@ -11,6 +12,7 @@
 IntroState::IntroState( StateMachine& machine, sf::RenderWindow& window, bool replace )
 : GameState( machine, window, replace )
 {
+	_state = sf::Text("IntroState", *Game::Font);
 	std::cout << "IntroState Init" << std::endl;
 }
 
@@ -69,5 +71,6 @@ void IntroState::draw()
 {
 	// Clear the previous drawing
 	_window.clear();
+	_window.draw(_state);
 	_window.display();
 }

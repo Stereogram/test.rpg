@@ -7,10 +7,12 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
+#include "../Game.hpp"
 
 PlayState::PlayState( StateMachine& machine, sf::RenderWindow& window, bool replace )
 : GameState( machine, window, replace )
 {
+	_state = sf::Text("PlayState", *Game::Font);
 	std::cout << "PlayState Init" << std::endl;
 }
 
@@ -68,5 +70,6 @@ void PlayState::draw()
 {
 	// Clear the previous drawing
 	_window.clear();
+	_window.draw(_state);
 	_window.display();
 }

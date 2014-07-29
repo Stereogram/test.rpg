@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include "SFML/Graphics/Text.hpp"
 
 class StateMachine;
 
@@ -26,7 +27,7 @@ public:
 	void draw();
 
 private:
-
+	sf::Text _state;
 };
 
 #endif // MENUSTATE_HPP

@@ -1,4 +1,4 @@
-#include "Util/tmxparser.h"
+#include "../Util/tmxparser.hpp"
 
 
 #if (defined(_WIN32))
@@ -283,7 +283,7 @@ namespace tmxparser
 
 		outLayer->name = element->Attribute("name");
 		outLayer->opacity = element->FloatAttribute("opacity");
-		outLayer->visible = element->IntAttribute("visible");
+		outLayer->visible = element->IntAttribute("visible") != 0;
 		outLayer->width = element->UnsignedAttribute("width");
 		outLayer->height = element->UnsignedAttribute("height");
 

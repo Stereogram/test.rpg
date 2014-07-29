@@ -3,10 +3,7 @@
 
 #include "GameState.hpp"
 
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#include "SFML/Graphics/Text.hpp"
 
 class StateMachine;
 
@@ -28,7 +25,7 @@ public:
 	void draw();
 
 private:
-
+	sf::Text _state;
 };
 
 #endif // INTROSTATE_HPP

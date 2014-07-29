@@ -6,10 +6,12 @@
 
 #include <memory>
 #include <iostream>
+#include "../Game.hpp"
 
 MenuState::MenuState( StateMachine& machine, sf::RenderWindow& window, bool replace )
 : GameState( machine, window, replace )
 {
+	_state = sf::Text("MenuState", *Game::Font);
 	std::cout << "MenuState Init" << std::endl;
 }
 
@@ -62,5 +64,6 @@ void MenuState::draw()
 {
 	// Clear the previous drawing
 	_window.clear();
+	_window.draw(_state);
 	_window.display();
 }
