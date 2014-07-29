@@ -3,7 +3,6 @@
 
 #include <memory>
 #include "SFML\Graphics.hpp"
-#include <Thor\>
 
 class Entity : public sf::Drawable, sf::Transformable
 {

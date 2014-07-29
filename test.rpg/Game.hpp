@@ -5,8 +5,8 @@
 #include <SFML/Graphics/Font.hpp>
 #include <memory>
 
-#include "StateMachine.hpp"
-#include "IntroState.hpp"
+#include "States/StateMachine.hpp"
+#include "States/IntroState.hpp"
 
 class Game
 {
