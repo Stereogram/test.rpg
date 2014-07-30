@@ -92,6 +92,7 @@
     <ClCompile Include="States\MenuState.cpp" />
     <ClCompile Include="States\PlayState.cpp" />
     <ClCompile Include="States\StateMachine.cpp" />
+    <ClCompile Include="Util\AnimatedSprite.cpp" />
     <ClCompile Include="Util\tmxparser.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,8 @@
     <ClInclude Include="States\MenuState.hpp" />
     <ClInclude Include="States\PlayState.hpp" />
     <ClInclude Include="States\StateMachine.hpp" />
+    <ClInclude Include="Util\AnimatedSprite.hpp" />
+    <ClInclude Include="Util\Animation.hpp" />
     <ClInclude Include="Util\tmxparser.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
