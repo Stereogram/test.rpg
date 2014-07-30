@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <Thor/Resources/MultiResourceCache.hpp>
 #include <memory>
 
 #include "States/StateMachine.hpp"
@@ -14,8 +15,11 @@ public:
 	Game();
 	void run();
 	static const sf::Vector2u Size;
-	static const std::unique_ptr<sf::Font> Font;
+	static const std::unique_ptr<thor::MultiResourceCache> Cache;
 
+#ifdef _DEBUG
+	static const std::unique_ptr<sf::Font> Font;
+#endif
 private:
 	StateMachine _machine;
 	sf::RenderWindow _window;

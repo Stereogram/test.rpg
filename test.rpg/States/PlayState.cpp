@@ -4,13 +4,16 @@
 #include "StateMachine.hpp"
 #include "PlayState.hpp"
 #include "MenuState.hpp"
+#include "../Game.hpp"
+#include "../AnimationReader.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
-#include "../Game.hpp"
+#include <Thor/Resources/ResourceKey.hpp>
 
 PlayState::PlayState( StateMachine& machine, sf::RenderWindow& window, bool replace )
 : GameState( machine, window, replace )
+, _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"),sf::Vector2u(32,32),Animation::readAnimation("assets\\soldier.ani"))
 {
 	_state = sf::Text("PlayState", *Game::Font);
 	std::cout << "PlayState Init" << std::endl;
@@ -28,6 +31,7 @@ void PlayState::resume()
 
 void PlayState::update(sf::Time dt)
 {
+	_sprite.update(dt);
 	sf::Event event;
 
 	while( _window.pollEvent( event ) )
@@ -71,5 +75,6 @@ void PlayState::draw()
 	// Clear the previous drawing
 	_window.clear();
 	_window.draw(_state);
+	_window.draw(_sprite);
 	_window.display();
 }

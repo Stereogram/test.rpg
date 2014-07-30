@@ -3,6 +3,7 @@
 
 #include "GameState.hpp"
 #include "SFML\Graphics\Text.hpp"
+#include "..\Util\AnimatedSprite.hpp"
 
 class StateMachine;
 
@@ -25,6 +26,7 @@ public:
 
 private:
 	sf::Text _state;
+	AnimatedSprite _sprite;
 };
 
 #endif // PLAYSTATE_HPP
