@@ -25,7 +25,7 @@ void MenuState::resume()
 	std::cout << "MenuState Resume" << std::endl;
 }
 
-void MenuState::update(sf::Time dt)
+void MenuState::update(const sf::Time dt)
 {
 	sf::Event event;
 

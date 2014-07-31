@@ -20,7 +20,7 @@ public:
 	virtual void pause() = 0;
 	virtual void resume() = 0;
 
-	virtual void update(sf::Time) = 0;
+	virtual void update(const sf::Time) = 0;
 	virtual void processEvents() = 0;
 	virtual void draw() = 0;
 

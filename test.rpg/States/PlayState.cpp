@@ -5,7 +5,6 @@
 #include "PlayState.hpp"
 #include "MenuState.hpp"
 #include "../Game.hpp"
-#include "../AnimationReader.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
@@ -33,7 +32,7 @@ void PlayState::resume()
 	std::cout << "PlayState Resume" << std::endl;
 }
 
-void PlayState::update(sf::Time dt)
+void PlayState::update(const sf::Time dt)
 {
 	_sprite.update(dt);
 	sf::Event event;

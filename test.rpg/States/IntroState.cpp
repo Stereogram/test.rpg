@@ -26,7 +26,7 @@ void IntroState::resume()
 	std::cout << "IntroState Resume" << std::endl;
 }
 
-void IntroState::update(sf::Time dt)
+void IntroState::update(const sf::Time dt)
 {
     sf::Event event;
 

@@ -5,6 +5,7 @@
 #include <SFML\Graphics.hpp>
 #include <Thor\Resources\ResourceKey.hpp>
 #include "..\Util\AnimatedSprite.hpp"
+#include "..\States\Stats.hpp"
 
 class Entity : public sf::Drawable, sf::Transformable
 {
@@ -14,8 +15,7 @@ public:
 
 private:
 	AnimatedSprite _sprite;
-	int _hitPoints;
-	int _level;
+	Stats _stats;
 };
 
 #endif // ENTITY_HPP

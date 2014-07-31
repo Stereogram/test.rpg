@@ -15,12 +15,12 @@ namespace sf
 class PlayState : public GameState
 {
 public:
-	PlayState( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
+	PlayState(StateMachine& machine, sf::RenderWindow& window, bool replace = true);
 
 	void pause();
 	void resume();
 
-	void update(sf::Time);
+	void update(const sf::Time);
 	void processEvents();
 	void draw();
 

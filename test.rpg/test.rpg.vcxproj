@@ -87,6 +87,7 @@
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="States\BattleState.cpp" />
     <ClCompile Include="States\GameState.cpp" />
     <ClCompile Include="States\IntroState.cpp" />
     <ClCompile Include="States\MenuState.cpp" />
@@ -98,11 +99,14 @@
   <ItemGroup>
     <ClInclude Include="Entities\Entity.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="States\BattleState.hpp" />
     <ClInclude Include="States\GameState.hpp" />
     <ClInclude Include="States\IntroState.hpp" />
     <ClInclude Include="States\MenuState.hpp" />
+    <ClInclude Include="States\Player.hpp" />
     <ClInclude Include="States\PlayState.hpp" />
     <ClInclude Include="States\StateMachine.hpp" />
+    <ClInclude Include="States\Stats.hpp" />
     <ClInclude Include="Util\AnimatedSprite.hpp" />
     <ClInclude Include="Util\Animation.hpp" />
     <ClInclude Include="Util\tmxparser.hpp" />

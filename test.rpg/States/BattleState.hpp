@@ -1,5 +1,5 @@
-#ifndef INTROSTATE_HPP
-#define INTROSTATE_HPP
+#ifndef BATTLESTATE_HPP
+#define BATTLESTATE_HPP
 
 #include "GameState.hpp"
 
@@ -12,10 +12,10 @@ namespace sf
 	class RenderWindow;
 }
 
-class IntroState : public GameState
+class BattleState : public GameState
 {
 public:
-	IntroState( StateMachine& game, sf::RenderWindow& window, bool replace = true );
+	BattleState(StateMachine& game, sf::RenderWindow& window, bool replace = true);
 
 	void pause();
 	void resume();
@@ -28,4 +28,4 @@ private:
 	sf::Text _state;
 };
 
-#endif // INTROSTATE_HPP
+#endif // BATTLESTATE_HPP
