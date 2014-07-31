@@ -2,18 +2,23 @@
 #define ANIMATION_HPP
 
 #include <string>
-#include "SFML\System\Time.hpp"
+#include <SFML\System\Time.hpp>
 #include <fstream>
 
 struct Animation
 {
-	std::string Name;
-	int Frames;
-	sf::Time Duration;
-	Animation(std::string name, int frames, float duration) : Name(name), Frames(frames), Duration(sf::seconds(duration))
-	{
-	}
-	static std::unique_ptr<std::vector<Animation>> readAnimation(std::string fileName)
+public:
+	const std::string Name;
+	const int Frames;
+	const sf::Time Duration;
+
+	Animation(std::string name, int frames, float duration)
+	: Name(name)
+	, Frames(frames)
+	, Duration(sf::seconds(duration))
+	{ }
+
+	static std::unique_ptr<std::vector<Animation>> readAnimation(const std::string fileName)
 	{
 		std::unique_ptr<std::vector<Animation>> v(new std::vector<Animation>);
 		std::ifstream file(fileName);
@@ -26,6 +31,7 @@ struct Animation
 		}
 		return v;
 	}
+
 };
 
 #endif

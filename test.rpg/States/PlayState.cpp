@@ -13,10 +13,14 @@
 
 PlayState::PlayState( StateMachine& machine, sf::RenderWindow& window, bool replace )
 : GameState( machine, window, replace )
-, _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"),sf::Vector2u(32,32),Animation::readAnimation("assets\\soldier.ani"))
+, _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32,32), Animation::readAnimation("assets\\soldier.ani"))
 {
 	_state = sf::Text("PlayState", *Game::Font);
 	std::cout << "PlayState Init" << std::endl;
+	sf::View v = _window.getView();
+	v.zoom(.5f);
+	v.setCenter(100, 100);
+	_window.setView(v);
 }
 
 void PlayState::pause()

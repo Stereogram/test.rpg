@@ -2,7 +2,7 @@
 #define PLAYSTATE_HPP
 
 #include "GameState.hpp"
-#include "SFML\Graphics\Text.hpp"
+#include <SFML\Graphics\Text.hpp>
 #include "..\Util\AnimatedSprite.hpp"
 
 class StateMachine;

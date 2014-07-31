@@ -23,7 +23,7 @@ public:
 	void nextState();
 	void lastState();
 
-	void update(sf::Time);
+	void update(const sf::Time);
 	void processEvents();
 	void draw();
 

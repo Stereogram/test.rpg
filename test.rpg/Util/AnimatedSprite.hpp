@@ -3,18 +3,18 @@
 
 #include <Thor/Animation.hpp>
 #include <Thor/Resources.hpp>
-#include "SFML/Graphics/Sprite.hpp"
+#include <SFML/Graphics/Sprite.hpp>
 #include <memory>
 #include "Animation.hpp"
 
 class AnimatedSprite : public sf::Drawable
 {
 public:
-	AnimatedSprite(thor::ResourceKey<sf::Texture>, sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
-	void play(std::string, bool);
+	AnimatedSprite(const thor::ResourceKey<sf::Texture>,const sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
+	void play(const std::string, const bool);
 	void stop();
-	std::string currentAnimation();
-	void update(sf::Time);
+	std::string currentAnimation() const;
+	void update(const sf::Time);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:

@@ -1,5 +1,11 @@
 #include "Entity.hpp"
-#include "SFML\Graphics.hpp"
+#include <SFML\Graphics.hpp>
+
+Entity::Entity(thor::ResourceKey<sf::Texture> textureKey, sf::Vector2u size, std::unique_ptr<std::vector<Animation>> animations)
+: _sprite(textureKey, size, std::move(animations))
+{
+
+}
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
