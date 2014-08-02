@@ -1,3 +1,6 @@
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
 #include <SFML\Graphics\Drawable.hpp>
 #include <vector>
 #include <memory>
@@ -12,3 +15,5 @@ public:
 private:
 	std::vector<std::unique_ptr<Entity>> _party;
 };
+
+#endif

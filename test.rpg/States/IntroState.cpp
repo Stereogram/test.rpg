@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 
-IntroState::IntroState( StateMachine& machine, sf::RenderWindow& window, bool replace )
+IntroState::IntroState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState( machine, window, replace )
 {
 	_state = sf::Text("IntroState", *Game::Font);
@@ -21,7 +21,7 @@ void IntroState::pause()
 	std::cout << "IntroState Pause" << std::endl;
 }
 
-void IntroState::resume()
+void IntroState::resume(const std::unique_ptr<Params> params)
 {
 	std::cout << "IntroState Resume" << std::endl;
 }

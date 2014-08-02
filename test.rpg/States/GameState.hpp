@@ -2,6 +2,8 @@
 #define GAMESTATE_HPP
 
 #include <memory>
+#include "..\Entities\Player.hpp"
+#include "..\Params\Params.hpp"
 
 class StateMachine;
 
@@ -14,11 +16,11 @@ namespace sf
 class GameState
 {
 public:
-	GameState( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
+	GameState(StateMachine& machine, sf::RenderWindow& window, bool replace = true);
 	virtual ~GameState();
 
 	virtual void pause() = 0;
-	virtual void resume() = 0;
+	virtual void resume(const std::unique_ptr<Params> = nullptr) = 0;
 
 	virtual void update(const sf::Time) = 0;
 	virtual void processEvents() = 0;
@@ -33,7 +35,6 @@ protected:
     sf::RenderWindow& _window;
 
 	bool _replacing;
-
 	std::unique_ptr<GameState> _next;
 };
 

@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{cb816e34-f63a-4066-b93a-a67e71eca0b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\States\Params">
+      <UniqueIdentifier>{b126da07-0285-4413-86f4-dc06f206e823}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,11 +104,14 @@
     <ClInclude Include="States\BattleState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="States\Player.hpp">
+    <ClInclude Include="Entities\Stats.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="States\Stats.hpp">
+    <ClInclude Include="Entities\Player.hpp">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Params\Params.hpp">
+      <Filter>Header Files\States\Params</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

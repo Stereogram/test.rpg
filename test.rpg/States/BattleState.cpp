@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 
-BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool replace)
+BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace)
 {
 	_state = sf::Text("BattleState", *Game::Font);
@@ -21,7 +21,7 @@ void BattleState::pause()
 	std::cout << "BattleState Pause" << std::endl;
 }
 
-void BattleState::resume()
+void BattleState::resume(const std::unique_ptr<Params> params)
 {
 	std::cout << "BattleState Resume" << std::endl;
 }

@@ -9,8 +9,9 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Resources/ResourceKey.hpp>
+#include "BattleState.hpp"
 
-PlayState::PlayState( StateMachine& machine, sf::RenderWindow& window, bool replace )
+PlayState::PlayState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState( machine, window, replace )
 , _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32,32), Animation::readAnimation("assets\\soldier.ani"))
 {
@@ -27,7 +28,7 @@ void PlayState::pause()
 	std::cout << "PlayState Pause" << std::endl;
 }
 
-void PlayState::resume()
+void PlayState::resume(const std::unique_ptr<Params> params)
 {
 	std::cout << "PlayState Resume" << std::endl;
 }
@@ -54,6 +55,9 @@ void PlayState::update(const sf::Time dt)
 
 					case sf::Keyboard::M:
 						_next = StateMachine::build<MenuState>( _machine, _window, false );
+						break;
+					case sf::Keyboard::B:
+						_next = StateMachine::build<BattleState>(_machine, _window, false);
 						break;
 
 					default:

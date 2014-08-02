@@ -1,9 +1,9 @@
 #include "GameState.hpp"
 
-GameState::GameState( StateMachine& machine, sf::RenderWindow &window, bool replace )
-: _machine( machine )
-, _window( window )
-, _replacing( replace )
+GameState::GameState(StateMachine& machine, sf::RenderWindow& window, bool replace /*= true*/)
+: _machine(machine)
+, _window(window)
+, _replacing(replace)
 {
 
 }

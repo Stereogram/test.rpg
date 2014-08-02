@@ -53,13 +53,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Libs\c++\tinyxml-2\include;C:\Libs\c++\zlib\include;C:\Libs\c++\thor\include;C:\Libs\c++\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Libs\c++\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>tinyxml2.lib;zdll.lib;thor-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Libs\c++\tinyxml-2\lib;C:\Libs\c++\zlib\lib;C:\Libs\c++\thor\lib;C:\Libs\c++\sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfgui-d.lib;tinyxml2.lib;zdll.lib;thor-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Libs\c++\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,15 +98,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Entity.hpp" />
+    <ClInclude Include="Entities\Player.hpp" />
+    <ClInclude Include="Entities\Stats.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Params\Params.hpp" />
     <ClInclude Include="States\BattleState.hpp" />
     <ClInclude Include="States\GameState.hpp" />
     <ClInclude Include="States\IntroState.hpp" />
     <ClInclude Include="States\MenuState.hpp" />
-    <ClInclude Include="States\Player.hpp" />
     <ClInclude Include="States\PlayState.hpp" />
     <ClInclude Include="States\StateMachine.hpp" />
-    <ClInclude Include="States\Stats.hpp" />
     <ClInclude Include="Util\AnimatedSprite.hpp" />
     <ClInclude Include="Util\Animation.hpp" />
     <ClInclude Include="Util\tmxparser.hpp" />

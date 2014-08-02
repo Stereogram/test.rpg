@@ -8,8 +8,8 @@
 #include <iostream>
 #include "../Game.hpp"
 
-MenuState::MenuState( StateMachine& machine, sf::RenderWindow& window, bool replace )
-: GameState( machine, window, replace )
+MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
+: GameState(machine, window, replace)
 {
 	_state = sf::Text("MenuState", *Game::Font);
 	std::cout << "MenuState Init" << std::endl;
@@ -20,7 +20,7 @@ void MenuState::pause()
 	std::cout << "MenuState Pause" << std::endl;
 }
 
-void MenuState::resume()
+void MenuState::resume(const std::unique_ptr<Params> params)
 {
 	std::cout << "MenuState Resume" << std::endl;
 }

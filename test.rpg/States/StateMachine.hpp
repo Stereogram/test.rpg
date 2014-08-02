@@ -5,6 +5,8 @@
 #include <stack>
 #include <string>
 #include "SFML\System\Time.hpp"
+#include "..\Entities\Player.hpp"
+#include "..\Params\Params.hpp"
 
 class GameState;
 
@@ -18,7 +20,7 @@ class StateMachine
 public:
 	StateMachine();
 
-	void run( std::unique_ptr<GameState> state );
+	void run(std::unique_ptr<GameState> state);
 
 	void nextState();
 	void lastState();
@@ -31,7 +33,7 @@ public:
 	void quit() { _running = false; }
 
 	template <typename T>
-	static std::unique_ptr<T> build( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
+	static std::unique_ptr<T> build(StateMachine& machine, sf::RenderWindow& window, bool replace = true, std::unique_ptr<Params> = nullptr);
 
 private:
 	// The stack of states
@@ -42,9 +44,9 @@ private:
 };
 
 template <typename T>
-std::unique_ptr<T> StateMachine::build( StateMachine& machine, sf::RenderWindow& window, bool replace )
+std::unique_ptr<T> StateMachine::build(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 {
-	return std::move( std::unique_ptr<T>( new T( machine, window, replace ) ) );
+	return std::move( std::unique_ptr<T>(new T( machine, window, replace, std::move(params) )));
 }
 
 #endif // GAMEENGINE_HPP

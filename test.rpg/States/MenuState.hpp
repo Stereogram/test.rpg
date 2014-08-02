@@ -17,10 +17,10 @@ namespace sf
 class MenuState : public GameState
 {
 public:
-	MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace = true);
+	MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace = true, std::unique_ptr<Params> = nullptr);
 
 	void pause();
-	void resume();
+	void resume(const std::unique_ptr<Params> = nullptr);
 
 	void update(const sf::Time);
 	void processEvents();
@@ -28,6 +28,7 @@ public:
 
 private:
 	sf::Text _state;
+	
 };
 
 #endif // MENUSTATE_HPP
