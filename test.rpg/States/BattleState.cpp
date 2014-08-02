@@ -11,9 +11,10 @@
 
 BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace)
+, _params(new Params("BattleState"))
 {
 	_state = sf::Text("BattleState", *Game::Font);
-	std::cout << "BattleState Init" << std::endl;
+	std::cout << "BattleState Init " << _params->State << std::endl;
 }
 
 void BattleState::pause()
@@ -23,7 +24,7 @@ void BattleState::pause()
 
 void BattleState::resume(const std::unique_ptr<Params> params)
 {
-	std::cout << "BattleState Resume" << std::endl;
+	std::cout << "BattleState Resume from " << params->State << std::endl;
 }
 
 void BattleState::update(const sf::Time dt)
@@ -43,7 +44,7 @@ void BattleState::update(const sf::Time dt)
 				switch (event.key.code)
 				{
 				 case sf::Keyboard::Space:
-					_next = StateMachine::build<PlayState>(_machine, _window, true);
+					 _machine.lastState(std::move(_params));
 					break;
 
 				 case sf::Keyboard::Escape:

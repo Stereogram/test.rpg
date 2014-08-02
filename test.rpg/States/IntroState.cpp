@@ -13,7 +13,7 @@ IntroState::IntroState(StateMachine& machine, sf::RenderWindow& window, bool rep
 : GameState( machine, window, replace )
 {
 	_state = sf::Text("IntroState", *Game::Font);
-	std::cout << "IntroState Init" << std::endl;
+	std::cout << "IntroState Init " << (_parameters == nullptr?"null":_parameters->State) << std::endl;
 }
 
 void IntroState::pause()
@@ -43,7 +43,7 @@ void IntroState::update(const sf::Time dt)
                 switch( event.key.code )
                 {
                     case sf::Keyboard::Space:
-                        _next = StateMachine::build<PlayState>( _machine, _window, true );
+                        _next = StateMachine::build<PlayState>( _machine, _window, true, std::move(_parameters) );
                         break;
 
                     case sf::Keyboard::Escape:

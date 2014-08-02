@@ -16,7 +16,7 @@ namespace sf
 class GameState
 {
 public:
-	GameState(StateMachine& machine, sf::RenderWindow& window, bool replace = true);
+	GameState(StateMachine& machine, sf::RenderWindow& window, bool replace = true, std::unique_ptr<Params> = nullptr);
 	virtual ~GameState();
 
 	virtual void pause() = 0;
@@ -34,6 +34,7 @@ protected:
     StateMachine& _machine;
     sf::RenderWindow& _window;
 
+	std::unique_ptr<Params> _parameters;
 	bool _replacing;
 	std::unique_ptr<GameState> _next;
 };

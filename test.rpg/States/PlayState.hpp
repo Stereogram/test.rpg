@@ -29,6 +29,7 @@ public:
 private:
 	sf::Text _state;
 	AnimatedSprite _sprite;
+	std::unique_ptr<Params> _params;
 };
 
 #endif // PLAYSTATE_HPP

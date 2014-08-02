@@ -28,7 +28,7 @@ void StateMachine::nextState()
         
         // Resume previous state
         if (!_states.empty())
-			_states.top()->resume();
+			_states.top()->resume(std::move(_returnParams));
         
         _resume = false;
     }
@@ -53,8 +53,9 @@ void StateMachine::nextState()
 	}
 }
 
-void StateMachine::lastState()
+void StateMachine::lastState(std::unique_ptr<Params> params)
 {
+	_returnParams = std::move(params);
     _resume = true;
 }
 

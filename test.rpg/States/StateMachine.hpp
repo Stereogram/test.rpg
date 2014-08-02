@@ -23,7 +23,7 @@ public:
 	void run(std::unique_ptr<GameState> state);
 
 	void nextState();
-	void lastState();
+	void lastState(std::unique_ptr<Params> = nullptr);
 
 	void update(const sf::Time);
 	void processEvents();
@@ -38,7 +38,7 @@ public:
 private:
 	// The stack of states
 	std::stack<std::unique_ptr<GameState>> _states;
-
+	std::unique_ptr<Params> _returnParams;
 	bool _resume;
 	bool _running;
 };

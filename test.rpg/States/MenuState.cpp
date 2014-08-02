@@ -10,9 +10,10 @@
 
 MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace)
+, _params(new Params("MenuState"))
 {
 	_state = sf::Text("MenuState", *Game::Font);
-	std::cout << "MenuState Init" << std::endl;
+	std::cout << "MenuState Init" << _params->State << std::endl;
 }
 
 void MenuState::pause()
@@ -22,7 +23,7 @@ void MenuState::pause()
 
 void MenuState::resume(const std::unique_ptr<Params> params)
 {
-	std::cout << "MenuState Resume" << std::endl;
+	std::cout << "MenuState Resume from " << params->State << std::endl;
 }
 
 void MenuState::update(const sf::Time dt)
@@ -41,7 +42,7 @@ void MenuState::update(const sf::Time dt)
 				switch( event.key.code )
 				{
 					case sf::Keyboard::Escape:
-						_machine.lastState();
+						_machine.lastState(std::move(_params));
 						break;
 
 					default:

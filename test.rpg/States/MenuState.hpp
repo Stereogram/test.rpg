@@ -28,6 +28,7 @@ public:
 
 private:
 	sf::Text _state;
+	std::unique_ptr<Params> _params;
 	
 };
 
