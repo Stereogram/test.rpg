@@ -14,7 +14,7 @@ public:
 	void play(const std::string, const bool);
 	void stop();
 	std::string currentAnimation() const;
-	void update(const sf::Time);
+	void update(const sf::Time&);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:

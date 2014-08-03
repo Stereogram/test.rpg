@@ -20,9 +20,9 @@ public:
 	virtual ~GameState();
 
 	virtual void pause() = 0;
-	virtual void resume(const std::unique_ptr<Params> = nullptr) = 0;
+	virtual void resume(std::unique_ptr<Params> = nullptr) = 0;
 
-	virtual void update(const sf::Time) = 0;
+	virtual void update(const sf::Time&) = 0;
 	virtual void processEvents() = 0;
 	virtual void draw() = 0;
 

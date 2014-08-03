@@ -25,7 +25,7 @@ public:
 	void nextState();
 	void lastState(std::unique_ptr<Params> = nullptr);
 
-	void update(const sf::Time);
+	void update(const sf::Time&);
 	void processEvents();
 	void draw();
 

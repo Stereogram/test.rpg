@@ -12,13 +12,13 @@ public:
 	const int Frames;
 	const sf::Time Duration;
 
-	Animation(std::string name, int frames, float duration)
+	Animation(const std::string& name, const int frames, const float duration)
 	: Name(name)
 	, Frames(frames)
 	, Duration(sf::seconds(duration))
 	{ }
 
-	static std::unique_ptr<std::vector<Animation>> readAnimation(const std::string fileName)
+	static std::unique_ptr<std::vector<Animation>> readAnimation(const std::string& fileName)
 	{
 		std::unique_ptr<std::vector<Animation>> v(new std::vector<Animation>);
 		std::ifstream file(fileName);

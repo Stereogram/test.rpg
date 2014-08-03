@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFGUI/SFGUI.hpp>
 #include <Thor/Resources/MultiResourceCache.hpp>
 #include <memory>
 

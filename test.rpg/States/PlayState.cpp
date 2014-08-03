@@ -1,23 +1,26 @@
 #include <memory>
 #include <iostream>
 
-#include "StateMachine.hpp"
-#include "PlayState.hpp"
-#include "MenuState.hpp"
-#include "../Game.hpp"
-
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Resources/ResourceKey.hpp>
+
+#include "../Game.hpp"
+#include "StateMachine.hpp"
+#include "PlayState.hpp"
+#include "MenuState.hpp"
 #include "BattleState.hpp"
 
 PlayState::PlayState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState( machine, window, replace )
 , _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32,32), Animation::readAnimation("assets\\soldier.ani"))
-, _params(new Params("PlayState"))
+, _params(std::move(params))
 {
 	_state = sf::Text("PlayState", *Game::Font);
-	std::cout << "PlayState Init " << _params->State << std::endl;
+	
+	std::cout << "PlayState Init params:" << _params->State << std::endl;
+	_params->State = "PlayState";
+
 	sf::View v = _window.getDefaultView();
 	v.zoom(.5f);
 	v.setCenter(100, 100);
@@ -29,12 +32,20 @@ void PlayState::pause()
 	std::cout << "PlayState Pause" << std::endl;
 }
 
-void PlayState::resume(const std::unique_ptr<Params> params)
+void PlayState::resume(std::unique_ptr<Params> params)
 {
-	std::cout << "PlayState Resume from " << params->State << std::endl;
+	_params = std::move(params);
+	std::cout << "PlayState Resume from " << _params->State << std::endl;
+	_params->State = "PlayState";
+
+	sf::View v = _window.getDefaultView();
+	v.zoom(.5f);
+	v.setCenter(100, 100);
+	_window.setView(v);
+
 }
 
-void PlayState::update(const sf::Time dt)
+void PlayState::update(const sf::Time& dt)
 {
 	_sprite.update(dt);
 	sf::Event event;

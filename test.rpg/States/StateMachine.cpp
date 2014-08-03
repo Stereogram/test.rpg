@@ -59,7 +59,7 @@ void StateMachine::lastState(std::unique_ptr<Params> params)
     _resume = true;
 }
 
-void StateMachine::update(const sf::Time dt)
+void StateMachine::update(const sf::Time& dt)
 {
 	// Let the state update the game
 	_states.top()->update(dt);

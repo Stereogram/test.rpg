@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <memory>
 
 const sf::Time Game::_timePerFrame = sf::seconds(1.0f / 60.0f);
 const sf::Vector2u Game::Size = sf::Vector2u(720, 480);
@@ -14,7 +15,8 @@ Game::Game()
 	// Create render window
 	_window.create( sf::VideoMode{Size.x, Size.y}, "Engine Test v2.1", sf::Style::None );
 	// Initialize the engine
-	_machine.run( StateMachine::build<IntroState>( _machine, _window, true ) );
+	std::unique_ptr<Params> test = std::unique_ptr<Params>(new Params("test"));
+	_machine.run(StateMachine::build<IntroState>(_machine, _window, true, std::move(test)));
 #ifdef _DEBUG
 	Font->loadFromFile("C:\\Windows\\Fonts\\arial.ttf");
 #endif

@@ -12,7 +12,7 @@ struct Params
 {
 	std::string State;
 	std::unique_ptr<Player> Player;
-	Params(std::string state) :State(state)
+	Params(const std::string& state) :State(state)
 	{
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);

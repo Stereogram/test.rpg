@@ -11,9 +11,13 @@
 
 IntroState::IntroState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState( machine, window, replace )
+, _params(std::move(params))
 {
 	_state = sf::Text("IntroState", *Game::Font);
-	std::cout << "IntroState Init " << (_parameters == nullptr?"null":_parameters->State) << std::endl;
+	
+	std::cout << "IntroState Init params:" << _params->State << std::endl;
+	_params->State = "IntroState";
+
 }
 
 void IntroState::pause()
@@ -21,12 +25,12 @@ void IntroState::pause()
 	std::cout << "IntroState Pause" << std::endl;
 }
 
-void IntroState::resume(const std::unique_ptr<Params> params)
+void IntroState::resume(std::unique_ptr<Params> params)
 {
 	std::cout << "IntroState Resume" << std::endl;
 }
 
-void IntroState::update(const sf::Time dt)
+void IntroState::update(const sf::Time& dt)
 {
     sf::Event event;
 
@@ -43,7 +47,7 @@ void IntroState::update(const sf::Time dt)
                 switch( event.key.code )
                 {
                     case sf::Keyboard::Space:
-                        _next = StateMachine::build<PlayState>( _machine, _window, true, std::move(_parameters) );
+                        _next = StateMachine::build<PlayState>( _machine, _window, true, std::move(_params) );
                         break;
 
                     case sf::Keyboard::Escape:

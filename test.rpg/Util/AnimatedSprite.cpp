@@ -27,7 +27,7 @@ std::string AnimatedSprite::currentAnimation() const
 	return _animator.isPlayingAnimation() ? _animator.getPlayingAnimation() : "none";
 }
 
-void AnimatedSprite::update(const sf::Time dt)
+void AnimatedSprite::update(const sf::Time& dt)
 {
 	_animator.update(dt);
 	_animator.animate(_sprite);

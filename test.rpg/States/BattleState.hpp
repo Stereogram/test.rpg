@@ -19,9 +19,9 @@ public:
 	BattleState(StateMachine& game, sf::RenderWindow& window, bool replace = true, std::unique_ptr<Params> = nullptr);
 
 	void pause();
-	void resume(const std::unique_ptr<Params> = nullptr);
+	void resume(std::unique_ptr<Params> = nullptr);
 
-	void update(const sf::Time);
+	void update(const sf::Time&);
 	void processEvents();
 	void draw();
 
