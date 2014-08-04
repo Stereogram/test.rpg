@@ -25,9 +25,14 @@ namespace gui
 		Box(const thor::ResourceKey<sf::Texture>, const sf::Vector2f&);
 		Box(const sf::Color&  , const sf::Vector2f&);
 
+		void vertical(const bool b) { _vertical = b; }
+		void setOutline(const int i) { _outline = i; }
+
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
+		bool _vertical;
+		int _outline;
 		sf::RectangleShape _shape;
 	};
 }

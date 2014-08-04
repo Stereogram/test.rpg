@@ -11,9 +11,7 @@
 
 MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
-, _background(static_cast<sf::Vector2f>(Game::Size))
-, _menuItems()
-, _selected(0)
+, _menu(std::unique_ptr<gui::Box>(new gui::Box()), std::vector<std::string>() )
 {
 	_state = sf::Text("MenuState", *Game::Font);
 	
@@ -22,18 +20,11 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 
 	_window.setView(_window.getDefaultView());
 
-
-	_menuItems.push_back(sf::Text("herp 1", *Game::Font, 30));
-	_menuItems.push_back(sf::Text("herp 2", *Game::Font, 30));
-	_menuItems.push_back(sf::Text("herp 3", *Game::Font, 30));
-	_menuItems.push_back(sf::Text("herp 4", *Game::Font, 30));
-	_menuItems.push_back(sf::Text("herp 5", *Game::Font, 30));
-
-	for (size_t i = 0; i < _menuItems.size(); i++)
+	for (int i = 0; i < 5; i++)
 	{
-		_menuItems[i].setColor(sf::Color::Blue);
-		_menuItems[i].setPosition(Game::Size.x-200.0f, (30.0f*i) +20 );
+		_menu.add("herp " + std::to_string(i));
 	}
+	
 }
 
 void MenuState::pause()
@@ -49,7 +40,6 @@ void MenuState::resume(std::unique_ptr<Params> params)
 void MenuState::update(const sf::Time& dt)
 {
 	sf::Event event;
-	_menuItems[_selected].setColor(sf::Color::Blue);
 	while( _window.pollEvent( event ) )
 	{
 
@@ -66,10 +56,10 @@ void MenuState::update(const sf::Time& dt)
 						_machine.lastState(std::move(_params));
 						break;
 					case sf::Keyboard::Up:
-						_selected = _selected == 0 ? _menuItems.size() - 1 : _selected - 1;
+						_menu.prev();
 						break;
 					case sf::Keyboard::Down:
-						_selected = _selected + 1 >= _menuItems.size() ? 0 : _selected + 1;
+						_menu.next();
 						break;
 					default:
 						break;
@@ -83,7 +73,7 @@ void MenuState::update(const sf::Time& dt)
 		
 
 	}
-	_menuItems[_selected].setColor(sf::Color::Cyan);
+	
 }
 
 void MenuState::processEvents()
@@ -95,11 +85,7 @@ void MenuState::draw() const
 {
 	// Clear the previous drawing
 	_window.clear();
-	_window.draw(_background);
+	_window.draw(_menu);
 	_window.draw(_state);
-	for (sf::Text t : _menuItems)
-	{
-		_window.draw(t);
-	}
 	_window.display();
 }

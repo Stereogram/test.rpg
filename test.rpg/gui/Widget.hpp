@@ -20,6 +20,7 @@ namespace gui
 	protected:
 		std::vector<std::unique_ptr<Widget>> _children;
 		bool _visible;
+
 	private:
 		Widget(Widget const&);
 		void operator=(Widget const&);

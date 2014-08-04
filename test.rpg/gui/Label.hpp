@@ -23,6 +23,7 @@ namespace gui
 		Label(const sf::Font&, const std::string&, unsigned int charSize = 30u);
 
 		void setText(const std::string&);
+		void setColour(const sf::Color&);
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

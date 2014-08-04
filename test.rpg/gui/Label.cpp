@@ -9,6 +9,7 @@ gui::Label::Label(const sf::Font& font, const std::string& text, unsigned int ch
 
 void gui::Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states = getTransform();
 	target.draw(_text, states);
 	for (const auto& child : _children)
 	{
@@ -19,4 +20,9 @@ void gui::Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void gui::Label::setText(const std::string& text)
 {
 	_text.setString(text);
+}
+
+void gui::Label::setColour(const sf::Color& colour)
+{
+	_text.setColor(colour);
 }

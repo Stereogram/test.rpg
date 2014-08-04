@@ -30,6 +30,8 @@ namespace gui
 		void prev();
 		unsigned int getIndex() { return _selected; }
 
+		std::unique_ptr<gui::Label> operator[](int index);
+
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:

@@ -2,6 +2,7 @@
 #define MENUSTATE_HPP
 
 #include "GameState.hpp"
+#include "..\gui\Menu.hpp"
 
 namespace sf
 {
@@ -26,9 +27,7 @@ public:
 
 private:
 	sf::Text _state;
-	sf::RectangleShape _background;
-	std::vector<sf::Text> _menuItems;
-	size_t _selected;
+	gui::Menu _menu;
 };
 
 #endif // MENUSTATE_HPP
