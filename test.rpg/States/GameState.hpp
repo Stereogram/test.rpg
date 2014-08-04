@@ -24,7 +24,7 @@ public:
 
 	virtual void update(const sf::Time&) = 0;
 	virtual void processEvents() = 0;
-	virtual void draw() = 0;
+	virtual void draw() const = 0;
 
 	std::unique_ptr<GameState> next();
 
@@ -34,7 +34,7 @@ protected:
     StateMachine& _machine;
     sf::RenderWindow& _window;
 
-	std::unique_ptr<Params> _parameters;
+	std::unique_ptr<Params> _params;
 	bool _replacing;
 	std::unique_ptr<GameState> _next;
 };

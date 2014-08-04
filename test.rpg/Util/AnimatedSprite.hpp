@@ -1,16 +1,18 @@
 #ifndef ANIMATEDSPRITE_HPP
 #define ANIMATEDSPRITE_HPP
 
-#include <Thor/Animation.hpp>
-#include <Thor/Resources.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 #include <memory>
+
+#include <Thor/Animation/Animator.hpp>
+#include <Thor/Resources/ResourceKey.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
 #include "Animation.hpp"
 
-class AnimatedSprite : public sf::Drawable
+class AnimatedSprite : public sf::Drawable, public sf::Transformable
 {
 public:
-	AnimatedSprite(const thor::ResourceKey<sf::Texture>,const sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
+	AnimatedSprite(const thor::ResourceKey<sf::Texture>, const sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
 	void play(const std::string, const bool);
 	void stop();
 	std::string currentAnimation() const;

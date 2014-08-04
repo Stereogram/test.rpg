@@ -18,7 +18,7 @@ Game::Game()
 	std::unique_ptr<Params> test = std::unique_ptr<Params>(new Params("test"));
 	_machine.run(StateMachine::build<IntroState>(_machine, _window, true, std::move(test)));
 #ifdef _DEBUG
-	Font->loadFromFile("C:\\Windows\\Fonts\\arial.ttf");
+	Font->loadFromFile("assets/fonts/kenpixel_high_square.ttf");
 #endif
 }
 

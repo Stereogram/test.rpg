@@ -34,6 +34,12 @@
     <Filter Include="Header Files\States\Params">
       <UniqueIdentifier>{b126da07-0285-4413-86f4-dc06f206e823}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{0e9ceffb-9e33-4aed-8661-c8f8acc0736d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{cfb6aada-ed48-458d-af5f-3fb3e5899f36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="States\BattleState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\Label.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\Box.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\Menu.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +127,18 @@
     </ClInclude>
     <ClInclude Include="Params\Params.hpp">
       <Filter>Header Files\States\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Widget.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Label.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Box.hpp">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Menu.hpp">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

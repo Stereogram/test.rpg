@@ -4,19 +4,22 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Resources/ResourceKey.hpp>
+#include <Thor/Resources/SfmlLoaders.hpp>
 
 #include "../Game.hpp"
+#include "../Util/Animation.hpp"
 #include "StateMachine.hpp"
 #include "PlayState.hpp"
 #include "MenuState.hpp"
 #include "BattleState.hpp"
 
+
 PlayState::PlayState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
-: GameState( machine, window, replace )
-, _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32,32), Animation::readAnimation("assets\\soldier.ani"))
-, _params(std::move(params))
+: GameState( machine, window, replace, std::move(params) )
+, _sprite(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32,32), Animation::readAnimation("assets/soldier.ani"))
+, _font(Game::Cache->acquire(thor::Resources::fromFile<sf::Font>("assets/fonts/kenpixel_high_square.ttf")))
 {
-	_state = sf::Text("PlayState", *Game::Font);
+	_state = sf::Text("PlayState", *_font);
 	
 	std::cout << "PlayState Init params:" << _params->State << std::endl;
 	_params->State = "PlayState";
@@ -89,7 +92,7 @@ void PlayState::processEvents()
 }
 
 
-void PlayState::draw()
+void PlayState::draw() const
 {
 	// Clear the previous drawing
 	_window.clear();

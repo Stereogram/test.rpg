@@ -10,8 +10,7 @@
 #include <memory>
 
 IntroState::IntroState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
-: GameState( machine, window, replace )
-, _params(std::move(params))
+: GameState( machine, window, replace, std::move(params) )
 {
 	_state = sf::Text("IntroState", *Game::Font);
 	
@@ -71,7 +70,7 @@ void IntroState::processEvents()
 
 }
 
-void IntroState::draw()
+void IntroState::draw() const
 {
 	// Clear the previous drawing
 	_window.clear();

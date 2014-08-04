@@ -10,8 +10,7 @@
 #include "../Game.hpp"
 
 MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
-: GameState(machine, window, replace)
-, _params(std::move(params))
+: GameState(machine, window, replace, std::move(params))
 , _background(static_cast<sf::Vector2f>(Game::Size))
 , _menuItems()
 , _selected(0)
@@ -92,7 +91,7 @@ void MenuState::processEvents()
 
 }
 
-void MenuState::draw()
+void MenuState::draw() const
 {
 	// Clear the previous drawing
 	_window.clear();

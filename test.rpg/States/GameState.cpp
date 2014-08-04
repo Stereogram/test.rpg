@@ -4,7 +4,7 @@ GameState::GameState(StateMachine& machine, sf::RenderWindow& window, bool repla
 : _machine(machine)
 , _window(window)
 , _replacing(replace)
-, _parameters(std::move(params))
+, _params(std::move(params))
 {
 
 }

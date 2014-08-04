@@ -3,15 +3,13 @@
 
 #include "GameState.hpp"
 
-#include "SFML/Graphics/Text.hpp"
-#include "../Entities/Player.hpp"
-
-class StateMachine;
-
 namespace sf
 {
 	class RenderWindow;
+	class Text;
 }
+
+class StateMachine;
 
 class IntroState : public GameState
 {
@@ -23,11 +21,10 @@ public:
 
 	void update(const sf::Time&);
 	void processEvents();
-	void draw();
+	void draw() const;
 
 private:
 	sf::Text _state;
-	std::unique_ptr<Params> _params;
 };
 
 #endif // INTROSTATE_HPP

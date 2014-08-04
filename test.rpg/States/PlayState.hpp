@@ -2,16 +2,15 @@
 #define PLAYSTATE_HPP
 
 #include "GameState.hpp"
-#include <SFML\Graphics\Text.hpp>
-#include "..\Util\AnimatedSprite.hpp"
-#include "..\Entities\Player.hpp"
-
-class StateMachine;
 
 namespace sf
 {
 	class RenderWindow;
+	class Text;
 }
+
+class StateMachine;
+class AnimatedSprite;
 
 class PlayState : public GameState
 {
@@ -23,13 +22,13 @@ public:
 
 	void update(const sf::Time&);
 	void processEvents();
-	void draw();
+	void draw() const;
 
 
 private:
 	sf::Text _state;
 	AnimatedSprite _sprite;
-	std::unique_ptr<Params> _params;
+	std::shared_ptr<sf::Font> _font;
 };
 
 #endif // PLAYSTATE_HPP

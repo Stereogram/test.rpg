@@ -1,6 +1,9 @@
-#include "AnimatedSprite.hpp"
 #include <SFML/Graphics/Texture.hpp>
+#include <Thor/Animation/FrameAnimation.hpp>
+
+#include "AnimatedSprite.hpp"
 #include "../Game.hpp"
+
 
 AnimatedSprite::AnimatedSprite(const thor::ResourceKey<sf::Texture> textureKey, const sf::Vector2u size, std::unique_ptr<std::vector<Animation>> animations)
 : _sprite(*Game::Cache->acquire(textureKey))

@@ -5,7 +5,7 @@
 #include <SFML\System\Time.hpp>
 #include <fstream>
 
-struct Animation
+class Animation
 {
 public:
 	const std::string Name;

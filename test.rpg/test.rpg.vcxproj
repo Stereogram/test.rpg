@@ -86,6 +86,9 @@
   <ItemGroup>
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gui\Box.cpp" />
+    <ClCompile Include="gui\Label.cpp" />
+    <ClCompile Include="gui\Menu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="States\BattleState.cpp" />
     <ClCompile Include="States\GameState.cpp" />
@@ -101,6 +104,10 @@
     <ClInclude Include="Entities\Player.hpp" />
     <ClInclude Include="Entities\Stats.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="gui\Box.hpp" />
+    <ClInclude Include="gui\Label.hpp" />
+    <ClInclude Include="gui\Menu.hpp" />
+    <ClInclude Include="gui\Widget.hpp" />
     <ClInclude Include="Params\Params.hpp" />
     <ClInclude Include="States\BattleState.hpp" />
     <ClInclude Include="States\GameState.hpp" />
