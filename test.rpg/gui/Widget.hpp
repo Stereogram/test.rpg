@@ -14,11 +14,13 @@ namespace gui
 	public:
 		Widget(): _children(), _visible(true){ }
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
-		virtual void attach(std::unique_ptr<Widget> child) { _children.push_back(std::move(child)); }
+		virtual void attach(std::shared_ptr<Widget> child) { _children.push_back(std::move(child)); }
 		virtual void visible(const bool b) { _visible = b; }
+		std::shared_ptr<Widget> operator[](const int index) { return _children[index]; }
+		std::shared_ptr<Widget> getChild(const int index) { return _children[index]; }
 
 	protected:
-		std::vector<std::unique_ptr<Widget>> _children;
+		std::vector<std::shared_ptr<Widget>> _children;
 		bool _visible;
 
 	private:

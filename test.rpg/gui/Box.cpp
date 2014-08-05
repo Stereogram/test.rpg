@@ -29,6 +29,7 @@ gui::Box::Box()
 
 void gui::Box::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states = getTransform();
 	target.draw(_shape, states);
 	for (const auto& child : _children)
 	{

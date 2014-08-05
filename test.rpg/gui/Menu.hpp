@@ -22,7 +22,8 @@ namespace gui
 	class Menu : public Widget
 	{
 	public:
-		Menu(std::unique_ptr<Box>, std::vector<std::string>&);
+		Menu(std::vector<std::string>&, unsigned int size = 30u);
+		Menu();
 
 		void add(const std::string&);
 		void remove(const unsigned int index);
@@ -30,14 +31,14 @@ namespace gui
 		void prev();
 		unsigned int getIndex() { return _selected; }
 
-		std::unique_ptr<gui::Label> operator[](int index);
+		std::unique_ptr<gui::Label> operator[](const int index);
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
-		std::unique_ptr<gui::Box> _box;
 		std::vector<std::unique_ptr<gui::Label>> _menuItems;
 		unsigned int _selected;
+		unsigned int _size;
 		std::shared_ptr<sf::Font> _font;
 	};
 }

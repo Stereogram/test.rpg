@@ -26,8 +26,10 @@ public:
 	void draw() const;
 
 private:
+	void test();
 	sf::Text _state;
-	gui::Menu _menu;
+	std::shared_ptr<gui::Menu> _current;
+	std::stack<gui::Box*> _menus;
 };
 
 #endif // MENUSTATE_HPP

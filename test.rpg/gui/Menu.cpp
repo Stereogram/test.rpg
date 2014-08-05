@@ -4,25 +4,29 @@
 #include "Menu.hpp"
 #include "..\Game.hpp"
 
-gui::Menu::Menu(std::unique_ptr<Box> box, std::vector<std::string>& menuItems)
-: _box(std::move(box))
-, _font(Game::Cache->acquire(thor::Resources::fromFile<sf::Font>("assets/fonts/kenpixel_high_square.ttf")))
+gui::Menu::Menu(std::vector<std::string>& menuItems, unsigned int size)
+: _font(Game::Cache->acquire(thor::Resources::fromFile<sf::Font>("assets/fonts/kenpixel_high_square.ttf")))
 , _menuItems(0)
 , _selected(0)
+, _size(size)
 {
 	for (size_t i = 0; i < menuItems.size(); i++)
 	{
-		auto t = std::unique_ptr<gui::Label>(new Label(*_font, menuItems[i]));
-		t->setPosition(20.f, (30.f*i) + 20.f);//hardcoded positions ftw.
-		_menuItems.push_back(std::move(t));
+		add(menuItems[i]);
 	}
-	if (!_menuItems.empty())
-		_menuItems[0]->setColour(sf::Color::Cyan);
+}
+
+gui::Menu::Menu()
+: _font(Game::Cache->acquire(thor::Resources::fromFile<sf::Font>("assets/fonts/kenpixel_high_square.ttf")))
+, _menuItems(0)
+, _selected(0)
+{
+
 }
 
 void gui::Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(*_box, states);
+	states = getTransform();
 	for (const auto& item : _menuItems)
 	{
 		item->draw(target, states);
@@ -37,7 +41,7 @@ void gui::Menu::add(const std::string& item)
 {
 	auto t = std::unique_ptr<gui::Label>(new Label(*_font, item));
 	t->setPosition(20.f, (30.f*_menuItems.size()) + 20.f);//hardcoded positions ftw.
-	if (_menuItems.empty())
+	if (_menuItems.empty())//highlight first item as selected.
 		t->setColour(sf::Color::Cyan);
 	_menuItems.push_back(std::move(t));
 }
@@ -61,7 +65,7 @@ void gui::Menu::prev()
 	_menuItems[_selected]->setColour(sf::Color::Cyan);
 }
 
-std::unique_ptr<gui::Label> gui::Menu::operator[](int index)
+std::unique_ptr<gui::Label> gui::Menu::operator[](const int index)
 {
 	return std::move(_menuItems[index]);
 }

@@ -8,10 +8,12 @@
 #include "StateMachine.hpp"
 #include "MenuState.hpp"
 #include "../Game.hpp"
+#include "../gui/Menu.hpp"
 
 MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
-, _menu(std::unique_ptr<gui::Box>(new gui::Box()), std::vector<std::string>() )
+, _current(new gui::Menu())
+, _menus()
 {
 	_state = sf::Text("MenuState", *Game::Font);
 	
@@ -22,9 +24,11 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 
 	for (int i = 0; i < 5; i++)
 	{
-		_menu.add("herp " + std::to_string(i));
+		_current->add("herp " + std::to_string(i));
 	}
-	
+	gui::Box* temp = new gui::Box();
+	temp->attach(_current);
+	_menus.push(temp);
 }
 
 void MenuState::pause()
@@ -56,10 +60,17 @@ void MenuState::update(const sf::Time& dt)
 						_machine.lastState(std::move(_params));
 						break;
 					case sf::Keyboard::Up:
-						_menu.prev();
+						_current->prev();
 						break;
 					case sf::Keyboard::Down:
-						_menu.next();
+						_current->next();
+						break;
+					case sf::Keyboard::A:
+						test();
+						break;
+					case sf::Keyboard::S:
+						_menus.pop();
+						_current = std::dynamic_pointer_cast<gui::Menu>(_menus.top()->getChild(0));
 						break;
 					default:
 						break;
@@ -69,8 +80,6 @@ void MenuState::update(const sf::Time& dt)
 			default:
 				break;
 		}
-
-		
 
 	}
 	
@@ -85,7 +94,20 @@ void MenuState::draw() const
 {
 	// Clear the previous drawing
 	_window.clear();
-	_window.draw(_menu);
+	_window.draw(*_menus.top());
 	_window.draw(_state);
 	_window.display();
+}
+
+void MenuState::test()
+{
+	_current = std::shared_ptr<gui::Menu>(new gui::Menu());
+	for (int i = 0; i < 10; i++)
+	{
+		_current->add("derp " + std::to_string(i));
+	}
+	gui::Box* temp = new gui::Box();
+	temp->attach(_current);
+	_menus.push(temp);
+
 }
