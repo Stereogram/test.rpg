@@ -4,6 +4,7 @@
 #include "GameState.hpp"
 #include "..\gui\Menu.hpp"
 #include "..\gui\Box.hpp"
+#include "..\gui\TextBox.hpp"
 
 namespace sf
 {
@@ -31,6 +32,8 @@ private:
 	sf::Text _state;
 	std::shared_ptr<gui::Menu> _current;
 	std::stack<gui::Box*> _menus;
+
+	gui::TextBox _text;
 };
 
 #endif // MENUSTATE_HPP

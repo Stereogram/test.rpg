@@ -9,7 +9,7 @@ gui::Label::Label(const sf::Font& font, const std::string& text, unsigned int ch
 
 void gui::Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	states = getTransform();
+	states.transform *= getTransform();
 	target.draw(_text, states);
 	for (const auto& child : _children)
 	{

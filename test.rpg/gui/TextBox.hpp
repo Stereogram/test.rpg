@@ -2,13 +2,16 @@
 #define TEXTBOX_HPP
 
 #include <memory>
-#include <vector>
+#include <deque>
 
 #include <sfml/Graphics/RectangleShape.hpp>
 #include <Thor/Resources/ResourceKey.hpp>
+#include <Thor/Animation/Animator.hpp>
+#include "SFML/System/Time.hpp"
 
 #include "Widget.hpp"
 #include "Label.hpp"
+
 
 namespace sf
 {
@@ -21,13 +24,14 @@ namespace gui
 	class TextBox : public Widget
 	{
 	public:
-		TextBox(std::unique_ptr<std::vector<std::string>>, const unsigned int);
 		TextBox(const unsigned int);
 		void add(const std::string&);
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		void update(const sf::Time&);
 
 	private:
-		std::vector<std::unique_ptr<gui::Label>> _lines;
+		thor::Animator<gui::Label, std::string> _animator;
+		std::deque<std::unique_ptr<gui::Label>> _lines;
 		unsigned int _max;
 		std::shared_ptr<sf::Font> _font;
 	};

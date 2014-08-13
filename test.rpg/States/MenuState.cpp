@@ -13,6 +13,7 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 : GameState(machine, window, replace, std::move(params))
 , _current(new gui::Menu())
 , _menus()
+, _text(3)
 {
 	_state = sf::Text("MenuState", *Game::Font);
 	
@@ -25,10 +26,14 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 	{
 		_current->add("herp " + std::to_string(i));
 	}
-	_current->setPosition(200.f, 200.f);//todo: fix this
+	_current->setPosition(20.f, 20.f);
 	gui::Box* temp = new gui::Box();
 	temp->attach(_current);
 	_menus.push(temp);
+
+
+
+	_text.setPosition(100.f, 100.f);
 }
 
 void MenuState::pause()
@@ -72,6 +77,9 @@ void MenuState::update(const sf::Time& dt)
 						_menus.pop();
 						_current = std::dynamic_pointer_cast<gui::Menu>(_menus.top()->getChild(0));
 						break;
+					case sf::Keyboard::Q:
+						_text.add("derp");
+						break;
 					default:
 						break;
 				}
@@ -82,7 +90,7 @@ void MenuState::update(const sf::Time& dt)
 		}
 
 	}
-	
+	_text.update(dt);
 }
 
 void MenuState::processEvents()
@@ -95,6 +103,7 @@ void MenuState::draw() const
 	// Clear the previous drawing
 	_window.clear();
 	_window.draw(*_menus.top());
+	_window.draw(_text);
 	_window.draw(_state);
 	_window.display();
 }

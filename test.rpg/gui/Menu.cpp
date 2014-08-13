@@ -26,7 +26,7 @@ gui::Menu::Menu()
 
 void gui::Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	states = getTransform();
+	states.transform *= getTransform();
 	for (const auto& item : _menuItems)
 	{
 		item->draw(target, states);

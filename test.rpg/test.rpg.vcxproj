@@ -108,7 +108,7 @@
     <ClInclude Include="gui\Box.hpp" />
     <ClInclude Include="gui\Label.hpp" />
     <ClInclude Include="gui\Menu.hpp" />
-    <ClInclude Include="gui\TextBox.h" />
+    <ClInclude Include="gui\TextBox.hpp" />
     <ClInclude Include="gui\Widget.hpp" />
     <ClInclude Include="Params\Params.hpp" />
     <ClInclude Include="States\BattleState.hpp" />
