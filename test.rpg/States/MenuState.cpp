@@ -8,7 +8,6 @@
 #include "StateMachine.hpp"
 #include "MenuState.hpp"
 #include "../Game.hpp"
-#include "../gui/Menu.hpp"
 
 MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
@@ -26,6 +25,7 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 	{
 		_current->add("herp " + std::to_string(i));
 	}
+	_current->setPosition(200.f, 200.f);//todo: fix this
 	gui::Box* temp = new gui::Box();
 	temp->attach(_current);
 	_menus.push(temp);
@@ -106,6 +106,7 @@ void MenuState::test()
 	{
 		_current->add("derp " + std::to_string(i));
 	}
+	_current->setPosition(20.f, 20.f);
 	gui::Box* temp = new gui::Box();
 	temp->attach(_current);
 	_menus.push(temp);

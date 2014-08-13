@@ -89,6 +89,7 @@
     <ClCompile Include="gui\Box.cpp" />
     <ClCompile Include="gui\Label.cpp" />
     <ClCompile Include="gui\Menu.cpp" />
+    <ClCompile Include="gui\TextBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="States\BattleState.cpp" />
     <ClCompile Include="States\GameState.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="gui\Box.hpp" />
     <ClInclude Include="gui\Label.hpp" />
     <ClInclude Include="gui\Menu.hpp" />
+    <ClInclude Include="gui\TextBox.h" />
     <ClInclude Include="gui\Widget.hpp" />
     <ClInclude Include="Params\Params.hpp" />
     <ClInclude Include="States\BattleState.hpp" />

@@ -3,6 +3,7 @@
 
 #include "GameState.hpp"
 #include "..\gui\Menu.hpp"
+#include "..\gui\Box.hpp"
 
 namespace sf
 {

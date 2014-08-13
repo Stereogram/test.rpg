@@ -12,10 +12,10 @@ AnimatedSprite::AnimatedSprite(const thor::ResourceKey<sf::Texture> textureKey, 
 , _animations(std::move(animations))
 {
 	addFrames();
-	_animator.playAnimation("left.walk", true);
+	_animator.playAnimation( (*_animations)[0].Name, true);
 }
 
-void AnimatedSprite::play(const std::string anim, const bool loop)
+void AnimatedSprite::play(const std::string& anim, const bool loop)
 {
 	_animator.playAnimation(anim, loop);
 }

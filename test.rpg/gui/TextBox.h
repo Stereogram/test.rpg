@@ -1,5 +1,5 @@
-#ifndef MENU_HPP
-#define MENU_HPP
+#ifndef TEXTBOX_HPP
+#define TEXTBOX_HPP
 
 #include <memory>
 #include <vector>
@@ -18,26 +18,17 @@ namespace sf
 
 namespace gui
 {
-	class Menu : public Widget
+	class TextBox : public Widget
 	{
 	public:
-		Menu(std::vector<std::string>&, unsigned int size = 30u);
-		Menu();
-
+		TextBox(std::unique_ptr<std::vector<std::string>>, const unsigned int);
+		TextBox(const unsigned int);
 		void add(const std::string&);
-		void remove(const unsigned int index);
-		void next();
-		void prev();
-		unsigned int getIndex() { return _selected; }
-
-		std::unique_ptr<gui::Label> operator[](const int index);
-
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
-		std::vector<std::unique_ptr<gui::Label>> _menuItems;
-		unsigned int _selected;
-		unsigned int _size;
+		std::vector<std::unique_ptr<gui::Label>> _lines;
+		unsigned int _max;
 		std::shared_ptr<sf::Font> _font;
 	};
 }

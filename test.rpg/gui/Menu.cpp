@@ -40,7 +40,7 @@ void gui::Menu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void gui::Menu::add(const std::string& item)
 {
 	auto t = std::unique_ptr<gui::Label>(new Label(*_font, item));
-	t->setPosition(20.f, (30.f*_menuItems.size()) + 20.f);//hardcoded positions ftw.
+	t->setPosition(0.f, (30.f*_menuItems.size()));//hardcoded positions ftw.
 	if (_menuItems.empty())//highlight first item as selected.
 		t->setColour(sf::Color::Cyan);
 	_menuItems.push_back(std::move(t));
