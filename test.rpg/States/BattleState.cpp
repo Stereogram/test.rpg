@@ -11,11 +11,18 @@
 
 BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
+, _messages(3)
+, _healthBox(sf::Color::Magenta, sf::Vector2f(Game::Size.x, Game::Size.y/5.f))
 {
 	_state = sf::Text("BattleState", *Game::Font);
 	
 	std::cout << "BattleState Init params:" << _params->State << std::endl;
 	_params->State = "BattleState";
+
+	_window.setView(_window.getDefaultView());
+
+	_messages.setPosition(20.f, Game::Size.y - Game::Size.y / 4.f);
+	_messages.add("testest");
 
 }
 
@@ -74,6 +81,9 @@ void BattleState::draw() const
 {
 	// Clear the previous drawing
 	_window.clear();
+	_window.draw(_background);
+	_window.draw(_healthBox);
+	_window.draw(_messages);
 	_window.draw(_state);
 	_window.display();
 }

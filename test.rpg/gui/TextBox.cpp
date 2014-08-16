@@ -9,7 +9,7 @@ gui::TextBox::TextBox(const unsigned int maxLines)
 : _font(Game::Cache->acquire(thor::Resources::fromFile<sf::Font>("assets/fonts/kenpixel_high_square.ttf")))
 , _max(maxLines)
 {
-	_animator.addAnimation("move", [] (Label& label, float progress) {label.move(0.f, progress * -1.f); }, sf::seconds(1.f));
+	_animator.addAnimation("move", [] (Label& label, float progress) {label.move(0.f, progress * -2.f); }, sf::seconds(0.5f));
 }
 
 void gui::TextBox::add(const std::string& item)

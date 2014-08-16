@@ -8,6 +8,7 @@
 #include "StateMachine.hpp"
 #include "MenuState.hpp"
 #include "../Game.hpp"
+#include "../gui/Widget.hpp"
 
 MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
@@ -31,8 +32,9 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 	temp->attach(_current);
 	_menus.push(temp);
 
-
-
+	_current->setName("herp");
+	std::shared_ptr<gui::Widget> lolk = temp->getChildByName("herp");
+	lolk->setPosition(50.f, 50.f);
 	_text.setPosition(100.f, 100.f);
 }
 

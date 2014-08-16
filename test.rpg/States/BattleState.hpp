@@ -2,6 +2,8 @@
 #define BATTLESTATE_HPP
 
 #include "GameState.hpp"
+#include "..\gui\Box.hpp"
+#include "..\gui\TextBox.hpp"
 
 namespace sf
 {
@@ -25,6 +27,11 @@ public:
 
 private:
 	sf::Text _state;
+
+	gui::Box _healthBox;
+	gui::Box _background;
+	gui::TextBox _messages;
+
 };
 
 #endif // BATTLESTATE_HPP
