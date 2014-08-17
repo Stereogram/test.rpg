@@ -1,16 +1,9 @@
-struct Stats
-{
-	stat Health;
-	stat Mana;
-	unsigned int Strength;
-	unsigned int Agility;
-	unsigned int Intelligence;
-	unsigned int Level;
-};
-
 struct Stat
 {
 public:
+	Stat(unsigned int max) : _max(max), _current(max)
+	{
+	}
 	void increase(const unsigned int amount)
 	{
 		_current = _current + amount >= _max ? _max : _current + amount;
@@ -26,4 +19,18 @@ public:
 private:
 	unsigned int _current;
 	unsigned int _max;
+};
+
+struct Stats
+{
+public:
+	Stats(unsigned int health, unsigned int mana) : Health(health), Mana(mana), Strength(1), Agility(1), Intelligence(1), Level(1)
+	{
+	}
+	unsigned int Strength;
+	unsigned int Agility;
+	unsigned int Intelligence;
+	unsigned int Level;
+	Stat Health;
+	Stat Mana;
 };

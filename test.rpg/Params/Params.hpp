@@ -12,6 +12,9 @@ struct Params
 {
 	std::string State;
 	std::unique_ptr<Player> Player;
+
+	virtual void test() {}
+
 	Params(const std::string& state) :State(state)
 	{
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -19,6 +22,7 @@ struct Params
 		std::cout << "params: " << State << " created" << std::endl;
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	}
+
 	~Params()
 	{
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -28,10 +32,20 @@ struct Params
 	}
 };
 
-
 struct BattleParams : public Params
 {
-	std::unique_ptr<std::vector<Entity>> Enemies;
+	std::unique_ptr<std::vector<Entity*>> Enemies;
+
+	virtual void test() {}
+
+	BattleParams(const std::string& state, std::unique_ptr<std::vector<Entity*>> enemies) : Params(state), Enemies(std::move(enemies))
+	{
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+		std::cout << "battleparams: created" << std::endl;
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	}
+
 };
 
 #endif

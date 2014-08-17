@@ -17,10 +17,8 @@ public:
 	void run();
 	static const sf::Vector2u Size;
 	static const std::unique_ptr<thor::MultiResourceCache> Cache;
-
-#ifdef _DEBUG
 	static const std::unique_ptr<sf::Font> Font;
-#endif
+
 private:
 	StateMachine _machine;
 	sf::RenderWindow _window;

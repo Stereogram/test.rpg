@@ -4,6 +4,7 @@
 #include "GameState.hpp"
 #include "..\gui\Box.hpp"
 #include "..\gui\TextBox.hpp"
+#include <queue>
 
 namespace sf
 {
@@ -26,11 +27,15 @@ public:
 	void draw() const;
 
 private:
+	void merge();
+
 	sf::Text _state;
 
 	gui::Box _healthBox;
 	gui::Box _background;
 	gui::TextBox _messages;
+
+	std::queue<Entity*> _queue;
 
 };
 

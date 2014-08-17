@@ -16,7 +16,8 @@ public:
 	: Name(name)
 	, Frames(frames)
 	, Duration(sf::seconds(duration))
-	{ }
+	{
+	}
 
 	static std::unique_ptr<std::vector<Animation>> readAnimation(const std::string& fileName)
 	{

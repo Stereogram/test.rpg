@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Entity.cpp" />
+    <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gui\Box.cpp" />
     <ClCompile Include="gui\Label.cpp" />

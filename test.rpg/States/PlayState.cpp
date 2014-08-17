@@ -28,6 +28,19 @@ PlayState::PlayState(StateMachine& machine, sf::RenderWindow& window, bool repla
 	v.zoom(.5f);
 	v.setCenter(100, 100);
 	_window.setView(v);
+
+	
+	std::unique_ptr<std::vector<Entity*>> enemies(new std::vector<Entity*>);
+	for (unsigned int i = 0; i < 4; i++)
+	{
+		Entity* t = new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani"));
+		t->getStats().Agility = i;
+		enemies->push_back(t);
+	}
+	auto temp = std::unique_ptr<Params>(new BattleParams("init", std::move(enemies)));
+	temp->Player = std::move(_params->Player);
+	_params = std::move(temp);
+
 }
 
 void PlayState::pause()

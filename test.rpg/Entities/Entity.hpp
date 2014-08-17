@@ -2,8 +2,10 @@
 #define ENTITY_HPP
 
 #include <memory>
+
 #include <SFML\Graphics.hpp>
 #include <Thor\Resources\ResourceKey.hpp>
+
 #include "..\Util\AnimatedSprite.hpp"
 #include "Stats.hpp"
 
@@ -12,6 +14,8 @@ class Entity : public sf::Drawable, sf::Transformable
 public:
 	Entity(thor::ResourceKey<sf::Texture>, sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	Stats& getStats() { return _stats; }
 
 private:
 	AnimatedSprite _sprite;

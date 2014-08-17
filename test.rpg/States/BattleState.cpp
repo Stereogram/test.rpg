@@ -1,18 +1,19 @@
-#include "BattleState.hpp"
-#include "PlayState.hpp"
-#include "StateMachine.hpp"
+#include <iostream>
+#include <memory>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
-#include "../Game.hpp"
 
-#include <iostream>
-#include <memory>
+#include "../Game.hpp"
+#include "BattleState.hpp"
+#include "PlayState.hpp"
+#include "StateMachine.hpp"
+#include "../Params/Params.hpp"
 
 BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
 , _messages(3)
-, _healthBox(sf::Color::Magenta, sf::Vector2f(Game::Size.x, Game::Size.y/5.f))
+, _healthBox(sf::Color::Magenta, sf::Vector2f(static_cast<float>(Game::Size.x), Game::Size.y/5.f))
 {
 	_state = sf::Text("BattleState", *Game::Font);
 	
@@ -23,6 +24,13 @@ BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool r
 
 	_messages.setPosition(20.f, Game::Size.y - Game::Size.y / 4.f);
 	_messages.add("testest");
+
+	merge();
+	while (!_queue.empty())
+	{
+		std::cout << _queue.front()->getStats().Agility << std::endl;
+		_queue.pop();
+	}
 
 }
 
@@ -86,4 +94,37 @@ void BattleState::draw() const
 	_window.draw(_messages);
 	_window.draw(_state);
 	_window.display();
+}
+
+void BattleState::merge()
+{
+	auto enemies = *dynamic_cast<BattleParams*>(_params.get())->Enemies;
+	auto party = *_params->Player->Party;
+	
+	unsigned int i = 0, j = 0;
+	while (i < 4 || j < enemies.size())
+	{
+		// If we're done with a, just gobble up b
+		if (i >= 4)
+		{
+			_queue.push(enemies[j++]);
+			continue;
+		}
+		
+		// If we're done with b, just gobble up a
+		if (j >= enemies.size())
+		{
+			_queue.push(party[i++]);
+			continue;
+		}
+
+		Entity* min;
+		int a = (*party[i]).getStats().Agility;
+		int b = (*enemies[j]).getStats().Agility;//todo: learn how to math.
+		
+		//Choose the larger of a or b
+		min = a >= b ? party[i++] : enemies[j++];
+
+		_queue.push( min );
+	}
 }
