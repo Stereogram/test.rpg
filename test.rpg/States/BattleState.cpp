@@ -28,7 +28,7 @@ BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool r
 	merge();
 	while (!_queue.empty())
 	{
-		std::cout << _queue.front()->getStats().Agility << std::endl;
+		std::cout << _queue.front()->Name << std::endl;
 		_queue.pop();
 	}
 
@@ -100,7 +100,10 @@ void BattleState::merge()
 {
 	auto enemies = *dynamic_cast<BattleParams*>(_params.get())->Enemies;
 	auto party = *_params->Player->Party;
-	
+
+	std::sort(enemies.begin(), enemies.end(), [] (Entity* a, Entity* b) {return a->getStats().Agility > b->getStats().Agility; });
+	std::sort(party.begin(), party.end(), [] (Entity* a, Entity* b) {return a->getStats().Agility > b->getStats().Agility; });
+
 	unsigned int i = 0, j = 0;
 	while (i < 4 || j < enemies.size())
 	{
@@ -120,7 +123,7 @@ void BattleState::merge()
 
 		Entity* min;
 		int a = (*party[i]).getStats().Agility;
-		int b = (*enemies[j]).getStats().Agility;//todo: learn how to math.
+		int b = (*enemies[j]).getStats().Agility;
 		
 		//Choose the larger of a or b
 		min = a >= b ? party[i++] : enemies[j++];

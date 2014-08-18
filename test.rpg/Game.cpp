@@ -21,6 +21,7 @@ Game::Game()
 	{
 		Entity* t = new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani"));
 		t->getStats().Agility = i + 10;
+		t->Name = "party" + std::to_string(i);
 		test->Player->Party->push_back(t);
 	}
 	_machine.run(StateMachine::build<IntroState>(_machine, _window, true, std::move(test)));

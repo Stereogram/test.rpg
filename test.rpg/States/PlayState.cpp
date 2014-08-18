@@ -34,7 +34,8 @@ PlayState::PlayState(StateMachine& machine, sf::RenderWindow& window, bool repla
 	for (unsigned int i = 0; i < 4; i++)
 	{
 		Entity* t = new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani"));
-		t->getStats().Agility = i;
+		t->getStats().Agility = i + 10;
+		t->Name = "enemie" + std::to_string(i);
 		enemies->push_back(t);
 	}
 	auto temp = std::unique_ptr<Params>(new BattleParams("init", std::move(enemies)));
