@@ -19,6 +19,10 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	Stats& getStats() { return _stats; }
+	gui::Bar& getHealthBar() { return _healthBar; }
+	gui::Bar& getManaBar() { return _manaBar; }
+	gui::Label& getHealthLabel() { return _healthLabel; }
+	gui::Label& getManaLabel() { return _manaLabel; }
 	std::unique_ptr<std::vector<std::pair<std::string, std::function<void(std::vector<Entity*>)>>>> getActions() { return std::move(_actions); }
 
 	std::string Name;
@@ -26,9 +30,10 @@ public:
 private:
 	AnimatedSprite _sprite;
 	Stats _stats;
-	gui::Bar _health;
-	gui::Bar _mana;
-
+	gui::Bar _healthBar;
+	gui::Bar _manaBar;
+	gui::Label _healthLabel;
+	gui::Label _manaLabel;
 
 	std::unique_ptr<std::vector<std::pair<std::string, std::function<void(std::vector<Entity*>)>>>> _actions;
 	Entity(Entity const&);

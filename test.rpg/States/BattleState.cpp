@@ -16,7 +16,7 @@ BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool r
 , _healthBox(sf::Color::Magenta, sf::Vector2f(static_cast<float>(Game::Size.x), Game::Size.y / 5.f))
 , _current(0)
 , _timer(sf::Time::Zero)
-, _testBox(sf::Color::Black, sf::Vector2f(Game::Size.x, Game::Size.y - 100.f))
+, _testBox(sf::Color::Black, sf::Vector2f(static_cast<float>(Game::Size.x), Game::Size.y - 100.f))
 {
 	_state = sf::Text("BattleState", *Game::Font);
 	
@@ -25,7 +25,7 @@ BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool r
 
 	_window.setView(_window.getDefaultView());
 
-	_messages.setPosition(20.f, Game::Size.y);
+	_messages.setPosition(20.f, static_cast<float>(Game::Size.y));
 	_messages.add("testest");
 
 	merge();
@@ -70,6 +70,12 @@ void BattleState::update(const sf::Time& dt)
 				 case sf::Keyboard::N:
 					 _params->Player->Party[0]->getStats().Agility += 10;
 					 break;
+				 case sf::Keyboard::A:
+					 _params->Player->Party[0]->getStats().Health.increase(10);
+					 break;
+				 case sf::Keyboard::S:
+					 _params->Player->Party[0]->getStats().Health.decrease(20);
+					 break;
 				 default:
 					break;
 				}
@@ -79,11 +85,16 @@ void BattleState::update(const sf::Time& dt)
 			default:
 				break;
 		}
-
-		
-
 	}
 	
+	for (const auto& member : _params->Player->Party)
+	{
+		member->getHealthBar().setBar(member->getStats().Health.getPercent());
+		member->getManaBar().setBar(member->getStats().Mana.getPercent());
+		member->getHealthLabel().setText(Stat::to_string(member->getStats().Health));
+		member->getManaLabel().setText(Stat::to_string(member->getStats().Mana));
+	}
+
 	if ((_timer += dt) >= sf::seconds(2))
 	{
 		_messages.add(_queue[_current]->Name + " | " + std::to_string(_queue[_current]->getStats().Agility));
@@ -101,12 +112,22 @@ void BattleState::processEvents()
 
 void BattleState::draw() const
 {
+	if (_params == nullptr)
+		return;
 	// Clear the previous drawing
 	_window.clear();
 	_window.draw(_background);
 	_window.draw(_messages);
 	_window.draw(_testBox);
 	_window.draw(_healthBox);
+	for (const auto& member : _params->Player->Party)
+	{
+		_window.draw(member->getHealthBar());
+		_window.draw(member->getManaBar());
+		_window.draw(member->getHealthLabel());
+		_window.draw(member->getManaLabel());
+	}
+
 	_window.draw(_state);
 	_window.display();
 }
@@ -118,6 +139,8 @@ void BattleState::merge()
 
 	std::sort(enemies.begin(), enemies.end(), [] (std::shared_ptr<Entity> a, std::shared_ptr<Entity> b) {return a->getStats().Agility > b->getStats().Agility; });
 	std::sort(party.begin(), party.end(), [] (std::shared_ptr<Entity> a, std::shared_ptr<Entity> b) {return a->getStats().Agility > b->getStats().Agility; });
+
+	separatePartyGUI();
 
 	unsigned int i = 0, j = 0;
 	while (i < 4 || j < enemies.size())
@@ -144,5 +167,19 @@ void BattleState::merge()
 		auto min = a >= b ? party[i++] : enemies[j++];
 
 		_queue.push_back(min);
+	}
+}
+
+void BattleState::separatePartyGUI()
+{
+	for (unsigned int i = 0; i < _params->Player->Party.size(); i++)
+	{
+		_params->Player->Party[i]->getHealthBar().setPosition(100.f + (i * 75.f), 20.f);
+		_params->Player->Party[i]->getManaBar().setPosition(100.f + (i * 75.f), 35.f);
+
+		std::cout << _params->Player->Party[i]->getStats().Health.getPercent() << std::endl;
+
+		_params->Player->Party[i]->getHealthLabel().setPosition(110.f + (i * 75.f), 17.f);
+		_params->Player->Party[i]->getManaLabel().setPosition(110.f + (i * 75.f), 32.f);
 	}
 }

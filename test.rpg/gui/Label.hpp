@@ -5,8 +5,10 @@
 #include <vector>
 
 #include <SFML/Graphics/Text.hpp>
+#include "sfml/Graphics/RectangleShape.hpp"
 
 #include "Widget.hpp"
+
 
 namespace sf
 {

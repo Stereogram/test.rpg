@@ -1,11 +1,14 @@
 #include "Entity.hpp"
 #include <SFML\Graphics.hpp>
+#include "..\Game.hpp"
 
 Entity::Entity(thor::ResourceKey<sf::Texture> textureKey, sf::Vector2u size, std::vector<Animation>& animations)
 : _sprite(textureKey, size, animations)
 , _stats(50, 50)
-, _health(sf::Vector2f(100.f,20.f))
-, _mana(sf::Vector2f(100.f, 20.f))
+, _healthBar(sf::Vector2f(50.f, 10.f))
+, _manaBar(sf::Vector2f(50.f, 10.f))
+, _healthLabel(*Game::Font, Stat::to_string(_stats.Health), 16U)
+, _manaLabel(*Game::Font, Stat::to_string(_stats.Mana), 16U)
 {
 
 }

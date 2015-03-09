@@ -28,7 +28,7 @@ public:
 
 private:
 	void merge();
-
+	void separatePartyGUI();
 	sf::Text _state;
 
 	gui::Box _healthBox;

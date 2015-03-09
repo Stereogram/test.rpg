@@ -43,6 +43,7 @@ gui::Bar::Bar(sf::Vector2f& size)
 
 void gui::Bar::setBar(float p)
 {
+
 	_foreground.setScale(p, 1.f);
 }
 
