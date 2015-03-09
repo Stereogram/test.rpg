@@ -19,14 +19,12 @@ Game::Game()
 	test->Player = std::unique_ptr<Player>(new Player());
 	for (unsigned int i = 0; i < 4; i++)
 	{
-		Entity* t = new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani"));
+		std::unique_ptr<Entity> t = std::unique_ptr<Entity>(new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani")));
 		t->getStats().Agility = i + 10;
 		t->Name = "party" + std::to_string(i);
-		test->Player->Party->push_back(t);
+		test->Player->Party.push_back(std::move(t));
 	}
 	_machine.run(StateMachine::build<IntroState>(_machine, _window, true, std::move(test)));
-
-
 
 	Font->loadFromFile("assets/fonts/kenpixel_high_square.ttf");
 }

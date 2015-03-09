@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 Player::Player()
-: Party(new std::vector<Entity*>())
+: Party()
 {
 
 }
@@ -9,4 +9,9 @@ Player::Player()
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 
+}
+
+Player::~Player()
+{
+	Party.clear();
 }

@@ -21,6 +21,7 @@ namespace gui
 	{
 	public:
 		Label(const sf::Font&, const std::string&, unsigned int charSize = 30u);
+		Label();
 
 		void setText(const std::string&);
 		void setColour(const sf::Color&);
@@ -30,6 +31,21 @@ namespace gui
 	private:
 		sf::Text _text;
 	};
+
+	class Bar : public Widget
+	{
+	public:
+		Bar(sf::Vector2f& size);
+
+		void setBar(float p);
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	private:
+		sf::RectangleShape _background;
+		sf::RectangleShape _foreground;
+
+	};
+
 }
 
 #endif

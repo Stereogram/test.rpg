@@ -33,6 +33,7 @@ private:
 	std::shared_ptr<gui::Menu> _current;
 	std::stack<gui::Box*> _menus;
 
+	gui::Label _label;
 	gui::TextBox _text;
 };
 

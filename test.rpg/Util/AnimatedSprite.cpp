@@ -5,14 +5,19 @@
 #include "../Game.hpp"
 
 
-AnimatedSprite::AnimatedSprite(const thor::ResourceKey<sf::Texture> textureKey, const sf::Vector2u size, std::unique_ptr<std::vector<Animation>> animations)
+AnimatedSprite::AnimatedSprite(const thor::ResourceKey<sf::Texture> textureKey, const sf::Vector2u size, std::vector<Animation>& animations)
 : _sprite(*Game::Cache->acquire(textureKey))
 , _size(size)
 , _tsize(_sprite.getTexture()->getSize())
-, _animations(std::move(animations))
+, _animations(animations)
 {
 	addFrames();
-	_animator.playAnimation( (*_animations)[0].Name, true);
+	_animator.playAnimation(_animations[0].Name, true);
+}
+
+AnimatedSprite::AnimatedSprite()
+{
+
 }
 
 void AnimatedSprite::play(const std::string& anim, const bool loop)
@@ -39,7 +44,7 @@ void AnimatedSprite::update(const sf::Time& dt)
 void AnimatedSprite::addFrames()
 {
 	int total = 0;
-	for (Animation anim : *_animations)
+	for (Animation anim : _animations)
 	{
 		thor::FrameAnimation temp;
 		for (int i = 0; i < anim.Frames; i++, total++)

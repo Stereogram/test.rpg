@@ -12,7 +12,8 @@
 class AnimatedSprite : public sf::Drawable, public sf::Transformable
 {
 public:
-	AnimatedSprite(const thor::ResourceKey<sf::Texture>, const sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
+	AnimatedSprite(const thor::ResourceKey<sf::Texture>, const sf::Vector2u, std::vector<Animation>&);
+	AnimatedSprite();
 	void play(const std::string&, const bool);
 	void stop();
 	std::string currentAnimation() const;
@@ -23,7 +24,7 @@ private:
 	void addFrames();
 
 	sf::Sprite _sprite;
-	std::unique_ptr<std::vector<Animation>> _animations;
+	std::vector<Animation> _animations;
 	sf::Vector2u _size;
 	sf::Vector2u _tsize;
 	thor::Animator<sf::Sprite, std::string> _animator;

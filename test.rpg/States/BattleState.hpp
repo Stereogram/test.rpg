@@ -4,7 +4,7 @@
 #include "GameState.hpp"
 #include "..\gui\Box.hpp"
 #include "..\gui\TextBox.hpp"
-#include <queue>
+#include <vector>
 
 namespace sf
 {
@@ -33,9 +33,12 @@ private:
 
 	gui::Box _healthBox;
 	gui::Box _background;
+	gui::Box _testBox;
 	gui::TextBox _messages;
 
-	std::queue<Entity*> _queue;
+	std::vector<std::shared_ptr<Entity>> _queue;
+	unsigned int _current;
+	sf::Time _timer;
 
 };
 

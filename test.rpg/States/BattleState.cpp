@@ -12,8 +12,11 @@
 
 BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool replace, std::unique_ptr<Params> params)
 : GameState(machine, window, replace, std::move(params))
-, _messages(3)
-, _healthBox(sf::Color::Magenta, sf::Vector2f(static_cast<float>(Game::Size.x), Game::Size.y/5.f))
+, _messages(4)
+, _healthBox(sf::Color::Magenta, sf::Vector2f(static_cast<float>(Game::Size.x), Game::Size.y / 5.f))
+, _current(0)
+, _timer(sf::Time::Zero)
+, _testBox(sf::Color::Black, sf::Vector2f(Game::Size.x, Game::Size.y - 100.f))
 {
 	_state = sf::Text("BattleState", *Game::Font);
 	
@@ -22,15 +25,11 @@ BattleState::BattleState(StateMachine& machine, sf::RenderWindow& window, bool r
 
 	_window.setView(_window.getDefaultView());
 
-	_messages.setPosition(20.f, Game::Size.y - Game::Size.y / 4.f);
+	_messages.setPosition(20.f, Game::Size.y);
 	_messages.add("testest");
 
 	merge();
-	while (!_queue.empty())
-	{
-		std::cout << _queue.front()->Name << std::endl;
-		_queue.pop();
-	}
+	
 
 }
 
@@ -48,6 +47,7 @@ void BattleState::update(const sf::Time& dt)
 {
 	sf::Event event;
 
+	//todo: convert to callbacks, eventloop is lame.
 	while (_window.pollEvent(event))
 	{
 		switch (event.type)
@@ -67,7 +67,9 @@ void BattleState::update(const sf::Time& dt)
 				 case sf::Keyboard::Escape:
 					_machine.quit();
 					break;
-
+				 case sf::Keyboard::N:
+					 _params->Player->Party[0]->getStats().Agility += 10;
+					 break;
 				 default:
 					break;
 				}
@@ -77,7 +79,19 @@ void BattleState::update(const sf::Time& dt)
 			default:
 				break;
 		}
+
+		
+
 	}
+	
+	if ((_timer += dt) >= sf::seconds(2))
+	{
+		_messages.add(_queue[_current]->Name + " | " + std::to_string(_queue[_current]->getStats().Agility));
+		_current = _current + 1 >= _queue.size() ? 0 : _current + 1;
+		_timer = sf::Time::Zero;
+	}
+
+	_messages.update(dt);
 }
 
 void BattleState::processEvents()
@@ -90,19 +104,20 @@ void BattleState::draw() const
 	// Clear the previous drawing
 	_window.clear();
 	_window.draw(_background);
-	_window.draw(_healthBox);
 	_window.draw(_messages);
+	_window.draw(_testBox);
+	_window.draw(_healthBox);
 	_window.draw(_state);
 	_window.display();
 }
 
 void BattleState::merge()
 {
-	auto enemies = *dynamic_cast<BattleParams*>(_params.get())->Enemies;
-	auto party = *_params->Player->Party;
+	auto enemies = dynamic_cast<BattleParams*>(_params.get())->Enemies;
+	auto party = _params->Player->Party;
 
-	std::sort(enemies.begin(), enemies.end(), [] (Entity* a, Entity* b) {return a->getStats().Agility > b->getStats().Agility; });
-	std::sort(party.begin(), party.end(), [] (Entity* a, Entity* b) {return a->getStats().Agility > b->getStats().Agility; });
+	std::sort(enemies.begin(), enemies.end(), [] (std::shared_ptr<Entity> a, std::shared_ptr<Entity> b) {return a->getStats().Agility > b->getStats().Agility; });
+	std::sort(party.begin(), party.end(), [] (std::shared_ptr<Entity> a, std::shared_ptr<Entity> b) {return a->getStats().Agility > b->getStats().Agility; });
 
 	unsigned int i = 0, j = 0;
 	while (i < 4 || j < enemies.size())
@@ -110,24 +125,24 @@ void BattleState::merge()
 		// If we're done with a, just gobble up b
 		if (i >= 4)
 		{
-			_queue.push(enemies[j++]);
+			_queue.push_back(enemies[j++]);
 			continue;
 		}
-		
+
 		// If we're done with b, just gobble up a
 		if (j >= enemies.size())
 		{
-			_queue.push(party[i++]);
+			_queue.push_back(party[i++]);
 			continue;
 		}
 
-		Entity* min;
-		int a = (*party[i]).getStats().Agility;
-		int b = (*enemies[j]).getStats().Agility;
-		
-		//Choose the larger of a or b
-		min = a >= b ? party[i++] : enemies[j++];
 
-		_queue.push( min );
+		int a = party[i]->getStats().Agility;
+		int b = enemies[j]->getStats().Agility;
+
+		//Choose the larger of a or b
+		auto min = a >= b ? party[i++] : enemies[j++];
+
+		_queue.push_back(min);
 	}
 }

@@ -12,11 +12,12 @@ class Player : sf::Drawable
 {
 public:
 	Player();
+	~Player();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	std::unique_ptr<std::vector<Entity*>> Party;
+	std::vector<std::shared_ptr<Entity>> Party;
 private:
-	
+	//todo: inventory.
 };
 
 #endif

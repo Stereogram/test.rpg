@@ -30,15 +30,15 @@ PlayState::PlayState(StateMachine& machine, sf::RenderWindow& window, bool repla
 	_window.setView(v);
 
 	
-	std::unique_ptr<std::vector<Entity*>> enemies(new std::vector<Entity*>);
+	std::vector<std::shared_ptr<Entity>> enemies;
 	for (unsigned int i = 0; i < 4; i++)
 	{
-		Entity* t = new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani"));
+		auto t = std::shared_ptr<Entity>(new Entity(thor::Resources::fromFile<sf::Texture>("assets/soldier.png"), sf::Vector2u(32, 32), Animation::readAnimation("assets/soldier.ani")));
 		t->getStats().Agility = i + 10;
-		t->Name = "enemie" + std::to_string(i);
-		enemies->push_back(t);
+		t->Name = "enemy" + std::to_string(i);
+		enemies.push_back(std::move(t));
 	}
-	auto temp = std::unique_ptr<Params>(new BattleParams("init", std::move(enemies)));
+	auto temp = std::unique_ptr<Params>(new BattleParams("init", enemies));
 	temp->Player = std::move(_params->Player);
 	_params = std::move(temp);
 
@@ -88,7 +88,9 @@ void PlayState::update(const sf::Time& dt)
 					case sf::Keyboard::B:
 						_next = StateMachine::build<BattleState>(_machine, _window, false, std::move(_params));
 						break;
-
+					case sf::Keyboard::N:
+						_params->Player->Party[0]->getStats().Agility += 2;
+						break;
 					default:
 						break;
 				}

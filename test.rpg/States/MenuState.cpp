@@ -15,6 +15,7 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 , _current(new gui::Menu())
 , _menus()
 , _text(3)
+, _label()
 {
 	_state = sf::Text("MenuState", *Game::Font);
 	
@@ -23,18 +24,18 @@ MenuState::MenuState(StateMachine& machine, sf::RenderWindow& window, bool repla
 
 	_window.setView(_window.getDefaultView());
 
-	for (int i = 0; i < 5; i++)
+	for (const auto& member : _params->Player->Party)
 	{
-		_current->add("herp " + std::to_string(i));
+		_current->add(member->Name);
 	}
-	_current->setPosition(20.f, 20.f);
+	_current->setPosition(10.f, 20.f);
 	gui::Box* temp = new gui::Box();
 	temp->attach(_current);
 	_menus.push(temp);
 
-	_current->setName("herp");
-	std::shared_ptr<gui::Widget> lolk = temp->getChildByName("herp");
-	lolk->setPosition(50.f, 50.f);
+	_label.setPosition(100.f, 20.f);
+	_label.setText(std::to_string(_params->Player->Party[_current->getIndex()]->getStats().Agility));
+
 	_text.setPosition(100.f, 100.f);
 }
 
@@ -68,15 +69,18 @@ void MenuState::update(const sf::Time& dt)
 						break;
 					case sf::Keyboard::Up:
 						_current->prev();
+						_label.setText(std::to_string(_params->Player->Party[_current->getIndex()]->getStats().Agility));
 						break;
 					case sf::Keyboard::Down:
 						_current->next();
+						_label.setText(std::to_string(_params->Player->Party[_current->getIndex()]->getStats().Agility));
 						break;
 					case sf::Keyboard::A:
 						test();
 						break;
 					case sf::Keyboard::S:
 						_menus.pop();
+						//point to the correct next menu. getChild(0) should be the menu.
 						_current = std::dynamic_pointer_cast<gui::Menu>(_menus.top()->getChild(0));
 						break;
 					case sf::Keyboard::Q:
@@ -105,6 +109,7 @@ void MenuState::draw() const
 	// Clear the previous drawing
 	_window.clear();
 	_window.draw(*_menus.top());
+	_window.draw(_label);
 	_window.draw(_text);
 	_window.draw(_state);
 	_window.display();
@@ -113,9 +118,9 @@ void MenuState::draw() const
 void MenuState::test()
 {
 	_current = std::shared_ptr<gui::Menu>(new gui::Menu());
-	for (int i = 0; i < 10; i++)
+	for (const auto& member : _params->Player->Party)
 	{
-		_current->add("derp " + std::to_string(i));
+		_current->add(member->Name);
 	}
 	_current->setPosition(20.f, 20.f);
 	gui::Box* temp = new gui::Box();

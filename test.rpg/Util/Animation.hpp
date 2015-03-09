@@ -19,9 +19,9 @@ public:
 	{
 	}
 
-	static std::unique_ptr<std::vector<Animation>> readAnimation(const std::string& fileName)
+	static std::vector<Animation>& readAnimation(const std::string& fileName)
 	{
-		std::unique_ptr<std::vector<Animation>> v(new std::vector<Animation>);
+		std::vector<Animation>* v = new std::vector<Animation>();
 		std::ifstream file(fileName);
 		int frames;
 		std::string name;
@@ -30,7 +30,7 @@ public:
 		{
 			v->push_back(Animation(name, frames, duration));
 		}
-		return v;
+		return *v;
 	}
 
 };

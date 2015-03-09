@@ -9,12 +9,13 @@
 
 #include "..\Util\AnimatedSprite.hpp"
 #include "Stats.hpp"
+#include "..\gui\Label.hpp"
 
 
 class Entity : public sf::Drawable, sf::Transformable
 {
 public:
-	Entity(thor::ResourceKey<sf::Texture>, sf::Vector2u, std::unique_ptr<std::vector<Animation>>);
+	Entity(thor::ResourceKey<sf::Texture>, sf::Vector2u, std::vector<Animation>&);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	Stats& getStats() { return _stats; }
@@ -25,7 +26,13 @@ public:
 private:
 	AnimatedSprite _sprite;
 	Stats _stats;
+	gui::Bar _health;
+	gui::Bar _mana;
+
+
 	std::unique_ptr<std::vector<std::pair<std::string, std::function<void(std::vector<Entity*>)>>>> _actions;
+	Entity(Entity const&);
+	void operator=(Entity const&);
 };
 
 #endif // ENTITY_HPP
