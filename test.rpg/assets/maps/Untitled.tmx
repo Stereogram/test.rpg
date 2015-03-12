@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="1" tilewidth="32" tileheight="32">
+  <image source="../Documents/Visual Studio 2013/Projects/testlol/testlol/bin/x86/Debug/assets/maps/1.png" width="416" height="224"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENgDAAwLAK2IG94v8zKeKJDB68R8o2xthJOJZzuUi4/Ujxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gjxo8WPFj9a/Gj5fsxAB79neQGQNmwl
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bEJgEAQRNEFCxALsAM1V3O1/4rcyy42uQPfg58PTAQ9mqtoa8qWbM22bGw75/fKH3t2ZGf4o7Xyx5Xd2RP+6MFQBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHzzAsUpAss=
+  </data>
+ </layer>
+</map>

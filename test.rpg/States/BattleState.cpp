@@ -177,8 +177,6 @@ void BattleState::separatePartyGUI()
 		_params->Player->Party[i]->getHealthBar().setPosition(100.f + (i * 75.f), 20.f);
 		_params->Player->Party[i]->getManaBar().setPosition(100.f + (i * 75.f), 35.f);
 
-		std::cout << _params->Player->Party[i]->getStats().Health.getPercent() << std::endl;
-
 		_params->Player->Party[i]->getHealthLabel().setPosition(110.f + (i * 75.f), 17.f);
 		_params->Player->Party[i]->getManaLabel().setPosition(110.f + (i * 75.f), 32.f);
 	}

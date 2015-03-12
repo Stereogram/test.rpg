@@ -1,0 +1,8 @@
+down.stand 1 1
+down.walk 2 1
+up.stand 1 1
+up.walk 2 1
+left.stand 1 1
+left.walk 2 1
+right.stand 1 1
+right.walk 2 1
